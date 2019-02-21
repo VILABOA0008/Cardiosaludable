@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
@@ -15,30 +16,30 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import javax.xml.transform.sax.SAXSource;
+
 public class MainActivity extends AppCompatActivity {
     ListView lv;
     AutoCompleteTextView av;
     ArrayList <String> nombres=new ArrayList<>();
-    ArrayList <String> cantidades=new ArrayList<>();
+    ArrayList <Integer> cantidades=new ArrayList<>();
     ArrayList <String> medidas=new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        av=(AutoCompleteTextView)findViewById(R.id.sv);
-        lv=(ListView)findViewById(R.id.lv);
+        av = (AutoCompleteTextView) findViewById(R.id.sv);
+        lv = (ListView) findViewById(R.id.lv);
 
-        DatabaseAcces aces= DatabaseAcces.getInstance(getApplicationContext());
+        DatabaseAcces aces = DatabaseAcces.getInstance(getApplicationContext());
         aces.open();
-        ArrayList<String >a=   aces.consultars();
-        for(int i=0;i<a.size();i++){
+        ArrayList<String> a = aces.consultars();
+        for (int i = 0; i < a.size(); i++) {
             System.out.println(a.get(i));
 
         }
         autocomplete(a);
-
 
     }
     public void on_cardiosaludable(View v){
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     public void on_añadir(View v){
 
         if(av.getText().toString().isEmpty()){
-         Toast.makeText(this,"Selecione un alimento",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Selecione un alimento",Toast.LENGTH_SHORT).show();
         }else {
             DatabaseAcces aces= DatabaseAcces.getInstance(getApplicationContext());
             boolean liquido=aces.isliquid(av.getText().toString());
@@ -87,7 +88,18 @@ public class MainActivity extends AppCompatActivity {
 
             Adaptador adaptador = new Adaptador(this, nombres,  medidas);
             lv.setAdapter(adaptador);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    System.out.println("DHAKSDNA");
+                }
+            });
+
         }
+    }
+    public void on_click(View v){
+
+
     }
 
 }
