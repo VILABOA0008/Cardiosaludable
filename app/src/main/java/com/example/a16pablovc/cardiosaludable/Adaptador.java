@@ -46,9 +46,7 @@ public int getCantidad(int posi){
         EditText can=(EditText)fila.findViewById(R.id.cant);
         TextView medi=(TextView)fila.findViewById(R.id.medida);
         nom.setText(nombre.get(position));
-        //System.out.println("AQUIUII"+cantidad.get(0));
         can.setText(String.valueOf(cantidad.get(position)));
-       // can.setId(position);
         medi.setText(medida.get(position));
 
         can.setOnFocusChangeListener(new View.OnFocusChangeListener() {

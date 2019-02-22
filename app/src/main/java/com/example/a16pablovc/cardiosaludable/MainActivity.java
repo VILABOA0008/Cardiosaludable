@@ -95,27 +95,40 @@ public class MainActivity extends AppCompatActivity {
         if(av.getText().toString().isEmpty()){
             Toast.makeText(this,"Selecione un alimento",Toast.LENGTH_SHORT).show();
         }else {
+
             DatabaseAcces aces= DatabaseAcces.getInstance(getApplicationContext());
-            boolean liquido=aces.isliquid(av.getText().toString());
-            nombres.add(av.getText().toString());
-            cantidades.add(100);
-            if(adaptador!=null){
-            for(int i=0;i<cantidades.size();i++) {
-                cantidades.set(i, adaptador.getCantidad(i));
-            }
-            }
-            if (liquido==false){medidas.add("g");}else{medidas.add("ml");}
-
-
-            adaptador= new Adaptador(this, nombres,cantidades,  medidas);
-            lv.setAdapter(adaptador);
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    System.out.println("DHAKSDNA");
+            if(aces.exists(av.getText().toString())) {
+                boolean liquido = aces.isliquid(av.getText().toString());
+                nombres.add(av.getText().toString());
+                cantidades.add(100);
+                if (adaptador != null) {
+                    for (int i = 0; i < cantidades.size(); i++) {
+                        cantidades.set(i, adaptador.getCantidad(i));
+                    }
                 }
-            });
+                if (liquido == false) {
+                    medidas.add("g");
+                } else {
+                    medidas.add("ml");
+                }
 
+
+                adaptador = new Adaptador(this, nombres, cantidades, medidas);
+                lv.setAdapter(adaptador);
+
+
+
+
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        System.out.println("LIST VIEW CLICKADA");
+                    }
+                });
+
+            }else{
+                Toast.makeText(this,"Ese producto no existe",Toast.LENGTH_SHORT).show();
+            }
         }
         av.setText("");
     }

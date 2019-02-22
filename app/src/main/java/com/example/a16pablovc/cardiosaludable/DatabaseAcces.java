@@ -100,7 +100,21 @@ if(bd!=null){
             }}}
         return a;
     }
+    public boolean exists(String pro){
+        ArrayList <String> a=new ArrayList<>();
+        boolean b=false;
+        for(int i=0;i<tablas.length;i++){
+            Cursor c = bd.rawQuery("SELECT * FROM "+tablas[i]+" ", null);
 
+            if (c.moveToFirst()) {
+                while(!c.isAfterLast()){
+                    if(pro.equalsIgnoreCase(c.getString(0))){b=true;i=tablas.length;break;}
+
+                    c.moveToNext();
+
+                }}}
+        return b;
+    }
 
     public String[] datos(String nombre){
         String[]  a=new String[3];
