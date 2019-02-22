@@ -24,6 +24,8 @@ public class Adaptador extends ArrayAdapter {
 
     public Adaptador(Activity context, ArrayList<String>nombre,   ArrayList<Integer>cantidad,ArrayList<String> medida){
         super(context, R.layout.lista ,nombre);
+        if(this.cantidad!=null&&cantidad.size()>this.cantidad.size()+1){System.out.println("ERRRROROOROR");
+        }
         this.context=context;
         this.nombre=nombre;
         this.cantidad=cantidad;
@@ -33,10 +35,6 @@ public class Adaptador extends ArrayAdapter {
 public int getCantidad(int posi){
     return cantidad.get(posi);
 }
-
-
-
-
 
     @NonNull
     @Override
@@ -66,6 +64,9 @@ public int getCantidad(int posi){
             @Override
             public void onClick(View v) {
                 System.out.println(position);
+                cantidad.remove(position);
+                medida.remove(position);
+                nombre.remove(position);
             }
         });
 
