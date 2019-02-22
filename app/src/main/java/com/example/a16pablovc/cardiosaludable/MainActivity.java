@@ -21,6 +21,7 @@ import javax.xml.transform.sax.SAXSource;
 public class MainActivity extends AppCompatActivity {
     ListView lv;
     AutoCompleteTextView av;
+    Adaptador adaptador=null;
     ArrayList <String> nombres=new ArrayList<>();
     ArrayList <Integer> cantidades=new ArrayList<>();
     ArrayList <String> medidas=new ArrayList<>();
@@ -43,7 +44,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void on_cardiosaludable(View v){
-        String nombre=av.getText().toString();
+        int sodio,azucar,grasa;
+        for(int i=0;i<lv.getCount();i++){
+            System.out.println(lv.getItemAtPosition(i));
+        }
+
+     /*   String nombre=av.getText().toString();
         System.out.println(nombre);
         DatabaseAcces aces= DatabaseAcces.getInstance(getApplicationContext());
         aces.open();
@@ -62,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("sod", a[2]);
 
             startActivity(i);
-        }else{Toast.makeText(this,"error",Toast.LENGTH_SHORT).show();;}
+        }else{Toast.makeText(this,"error",Toast.LENGTH_SHORT).show();;}*/
     }
 
 
@@ -83,10 +89,16 @@ public class MainActivity extends AppCompatActivity {
             DatabaseAcces aces= DatabaseAcces.getInstance(getApplicationContext());
             boolean liquido=aces.isliquid(av.getText().toString());
             nombres.add(av.getText().toString());
+            cantidades.add(100);
+            if(adaptador!=null){
+            for(int i=0;i<cantidades.size();i++) {
+                cantidades.set(i, adaptador.getCantidad(i));
+            }
+            }
             if (liquido==false){medidas.add("g");}else{medidas.add("ml");}
 
 
-            Adaptador adaptador = new Adaptador(this, nombres,  medidas);
+            adaptador= new Adaptador(this, nombres,cantidades,  medidas);
             lv.setAdapter(adaptador);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -96,10 +108,6 @@ public class MainActivity extends AppCompatActivity {
             });
 
         }
-    }
-    public void on_click(View v){
-
-
     }
 
 }

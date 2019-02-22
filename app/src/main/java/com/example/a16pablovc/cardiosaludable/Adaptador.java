@@ -18,17 +18,22 @@ import java.util.ArrayList;
 public class Adaptador extends ArrayAdapter {
     private Activity context;
     private ArrayList<String> nombre;
-
+    private ArrayList<Integer>cantidad;
     private ArrayList<String>medida;
 
 
-    public Adaptador(Activity context, ArrayList<String>nombre,  ArrayList<String> medida){
+    public Adaptador(Activity context, ArrayList<String>nombre,   ArrayList<Integer>cantidad,ArrayList<String> medida){
         super(context, R.layout.lista ,nombre);
         this.context=context;
         this.nombre=nombre;
-
+        this.cantidad=cantidad;
         this.medida=medida;
     }
+
+public int getCantidad(int posi){
+    return cantidad.get(posi);
+
+}
 
     @NonNull
     @Override
@@ -37,14 +42,21 @@ public class Adaptador extends ArrayAdapter {
         LayoutInflater inflater=context.getLayoutInflater();
         View fila = inflater.inflate(R.layout.lista,null);
         TextView nom=(TextView)fila.findViewById(R.id.nomb);
-
+        EditText can=(EditText)fila.findViewById(R.id.cant);
         TextView medi=(TextView)fila.findViewById(R.id.medida);
         nom.setText(nombre.get(position));
-
+        System.out.println("AQUIUII"+cantidad.get(0));
+        can.setText(String.valueOf(cantidad.get(position)));
+        can.setId(position);
         medi.setText(medida.get(position));
 
-
-
+        can.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                EditText et=(EditText)v;
+                cantidad.set(et.getId(),Integer.valueOf(et.getText().toString()));
+            }
+        });
         return fila;
         //return super.getView(position, convertView, parent);
     }
