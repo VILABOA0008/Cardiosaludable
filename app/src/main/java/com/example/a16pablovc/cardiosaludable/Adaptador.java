@@ -32,12 +32,15 @@ public class Adaptador extends ArrayAdapter {
 
 public int getCantidad(int posi){
     return cantidad.get(posi);
-
 }
+
+
+
+
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater=context.getLayoutInflater();
         View fila = inflater.inflate(R.layout.lista,null);
@@ -45,9 +48,9 @@ public int getCantidad(int posi){
         EditText can=(EditText)fila.findViewById(R.id.cant);
         TextView medi=(TextView)fila.findViewById(R.id.medida);
         nom.setText(nombre.get(position));
-        System.out.println("AQUIUII"+cantidad.get(0));
+        //System.out.println("AQUIUII"+cantidad.get(0));
         can.setText(String.valueOf(cantidad.get(position)));
-        can.setId(position);
+       // can.setId(position);
         medi.setText(medida.get(position));
 
         can.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -58,6 +61,15 @@ public int getCantidad(int posi){
                 cantidad.set(et.getId(),Integer.valueOf(et.getText().toString()));
             }
         });
+        ImageView borrar=(ImageView)fila.findViewById(R.id.borrar);
+        borrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(position);
+            }
+        });
+
+
         return fila;
         //return super.getView(position, convertView, parent);
     }
