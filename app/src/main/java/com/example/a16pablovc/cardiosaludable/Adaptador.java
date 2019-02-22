@@ -54,6 +54,7 @@ public int getCantidad(int posi){
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 EditText et=(EditText)v;
+                System.out.println(et.getText().toString());
                 cantidad.set(et.getId(),Integer.valueOf(et.getText().toString()));
             }
         });

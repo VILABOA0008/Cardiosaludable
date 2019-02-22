@@ -54,15 +54,18 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseAcces aces= DatabaseAcces.getInstance(getApplicationContext());
         aces.open();
+
         for(int i=0;i<lv.getCount();i++) {
+            cantidades.set(i, adaptador.getCantidad(i));
             String[] a = aces.datos(nombre[i]);
             String nom = nombre + "  ";
             nom += a[0];
             nom += "    " + a[1] + "    ";
             nom += a[2];
-            azucar+=Float.valueOf(a[0]);
-            grasa+=Float.valueOf(a[1]);
-            sodio+=Float.valueOf(a[2]);
+            if(aces.isfruta(nombre[i])){azucar=0;}else{
+            azucar+=(Float.valueOf(a[0])*cantidades.get(i)*0.01);}
+            grasa+=(Float.valueOf(a[1])*cantidades.get(i)*0.01);
+            sodio+=(Float.valueOf(a[2])*cantidades.get(i)*0.01);
             Toast.makeText(this, nom, Toast.LENGTH_SHORT).show();
         }
 
@@ -115,6 +118,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
         av.setText("");
+    }
+    public void on_borrar(View v){
+        System.out.println("borarrarar");
+
     }
 
 }
