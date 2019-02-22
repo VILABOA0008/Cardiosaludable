@@ -49,21 +49,21 @@ public class Main2Activity extends AppCompatActivity {
        //      a= String.format("%.2f", Float.valueOf(i.getStringExtra("azu")));
        //     f = Float.valueOf(a);
             if(aces.isfruta(nombre)){azuca=0f;}
-            if(azuca>12){azucar.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(azuca>5){azucar.setTextColor(getResources().getColor(R.color.orange));c++;}
+            if(azuca>10){azucar.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(azuca>5){azucar.setTextColor(getResources().getColor(R.color.orange));c++;}
             else {azucar.setTextColor(getResources().getColor(R.color.green));}
             azucar.setText(azuca+"g");
         }catch(java.lang.NumberFormatException e){azucar.setText(0.00+"g");}
         try {
      //    a=String.format("%.2f",Float.valueOf(i.getStringExtra("gra")));
     //    f=Float.valueOf(a);
-            if(gras>10){grasa.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(gras>5){grasa.setTextColor(getResources().getColor(R.color.orange));c++;}
+            if(gras>5){grasa.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(gras>1.5){grasa.setTextColor(getResources().getColor(R.color.orange));c++;}
             else {grasa.setTextColor(getResources().getColor(R.color.green));}
             grasa.setText(gras+"g");
         }catch(java.lang.NumberFormatException e){grasa.setText(0.00+"g");}
             try {
      //   a=String.format("%.2f",Float.valueOf(i.getStringExtra("sod")));
      //   f=Float.valueOf(a);
-                if(sodi>100){sodio.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(sodi>50){sodio.setTextColor(getResources().getColor(R.color.orange));c++;}
+                if(sodi>60){sodio.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(sodi>12){sodio.setTextColor(getResources().getColor(R.color.orange));c++;}
                 else {sodio.setTextColor(getResources().getColor(R.color.green));}
         sodio.setText(sodi+"mg");
             }catch(java.lang.NumberFormatException e){sodio.setText(0.00+"mg");}
