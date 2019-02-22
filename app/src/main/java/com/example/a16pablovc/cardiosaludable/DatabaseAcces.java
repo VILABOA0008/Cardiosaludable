@@ -108,9 +108,18 @@ if(bd!=null){
         c = bd.rawQuery("SELECT * FROM "+tablas[i]+" WHERE ALIMENTO= \""+nombre+"\""  ,null);
 
         if (c.moveToFirst()) {
-            a[0] = c.getString(1);
+            try{
+            a[0]=String.format("%.2f",Float.valueOf(c.getString(1)));
+            }catch(java.lang.NumberFormatException e){  a[0]="0";}
+            try{
+                a[1]=String.format("%.2f",Float.valueOf(c.getString(2)));
+            }catch(java.lang.NumberFormatException e){  a[1]="0";}
+            try{
+                a[2]=String.format("%.2f",Float.valueOf(c.getString(3)));
+            }catch(java.lang.NumberFormatException e){  a[2]="0";}
+       /*     a[0] = c.getString(1);
             a[1] = c.getString(2);
-            a[2] = c.getString(3);
+            a[2] = c.getString(3);*/
         }   }
         return a;
     }

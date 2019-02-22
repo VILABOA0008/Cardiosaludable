@@ -27,11 +27,18 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        Intent i=getIntent();
+        float  azuca=i.getFloatExtra("azu",0);
+        float gras=i.getFloatExtra("gra",0);
+        float sodi=i.getFloatExtra("sod",0);
+
+        Toast.makeText(this,azuca+"  casa  "+gras,Toast.LENGTH_SHORT).show();
+
         ll=(LinearLayout)findViewById(R.id.activity_main2);
         azucar=(TextView)findViewById(R.id.azucar);
         grasa=(TextView)findViewById(R.id.grasa);
         sodio=(TextView)findViewById(R.id.sodio);
-        Intent i=getIntent();
+
         Float f;
         String a;
         int c=0;
@@ -39,26 +46,26 @@ public class Main2Activity extends AppCompatActivity {
         DatabaseAcces aces= DatabaseAcces.getInstance(getApplicationContext());
 
         try {
-             a= String.format("%.2f", Float.valueOf(i.getStringExtra("azu")));
-            f = Float.valueOf(a);
-            if(aces.isfruta(nombre)){f=0f;}
-            if(f>12){azucar.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(f>5){azucar.setTextColor(getResources().getColor(R.color.orange));c++;}
+       //      a= String.format("%.2f", Float.valueOf(i.getStringExtra("azu")));
+       //     f = Float.valueOf(a);
+            if(aces.isfruta(nombre)){azuca=0f;}
+            if(azuca>12){azucar.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(azuca>5){azucar.setTextColor(getResources().getColor(R.color.orange));c++;}
             else {azucar.setTextColor(getResources().getColor(R.color.green));}
-            azucar.setText(f+"g");
+            azucar.setText(azuca+"g");
         }catch(java.lang.NumberFormatException e){azucar.setText(0.00+"g");}
         try {
-         a=String.format("%.2f",Float.valueOf(i.getStringExtra("gra")));
-        f=Float.valueOf(a);
-            if(f>10){grasa.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(f>5){grasa.setTextColor(getResources().getColor(R.color.orange));c++;}
+     //    a=String.format("%.2f",Float.valueOf(i.getStringExtra("gra")));
+    //    f=Float.valueOf(a);
+            if(gras>10){grasa.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(gras>5){grasa.setTextColor(getResources().getColor(R.color.orange));c++;}
             else {grasa.setTextColor(getResources().getColor(R.color.green));}
-            grasa.setText(f+"g");
+            grasa.setText(gras+"g");
         }catch(java.lang.NumberFormatException e){grasa.setText(0.00+"g");}
             try {
-        a=String.format("%.2f",Float.valueOf(i.getStringExtra("sod")));
-        f=Float.valueOf(a);
-                if(f>100){sodio.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(f>50){sodio.setTextColor(getResources().getColor(R.color.orange));c++;}
+     //   a=String.format("%.2f",Float.valueOf(i.getStringExtra("sod")));
+     //   f=Float.valueOf(a);
+                if(sodi>100){sodio.setTextColor(getResources().getColor(R.color.red));c+=2;}else if(sodi>50){sodio.setTextColor(getResources().getColor(R.color.orange));c++;}
                 else {sodio.setTextColor(getResources().getColor(R.color.green));}
-        sodio.setText(f+"mg");
+        sodio.setText(sodi+"mg");
             }catch(java.lang.NumberFormatException e){sodio.setText(0.00+"mg");}
 
 

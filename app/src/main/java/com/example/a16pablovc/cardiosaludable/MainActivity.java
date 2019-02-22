@@ -44,31 +44,37 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void on_cardiosaludable(View v){
-        int sodio,azucar,grasa;
+        float sodio=0,azucar=0,grasa=0;
+        String[]nombre=new String[lv.getCount()];
         for(int i=0;i<lv.getCount();i++){
+            nombre[i]=lv.getItemAtPosition(i).toString();
             System.out.println(lv.getItemAtPosition(i));
         }
 
-     /*   String nombre=av.getText().toString();
-        System.out.println(nombre);
+
         DatabaseAcces aces= DatabaseAcces.getInstance(getApplicationContext());
         aces.open();
-        String []a=   aces.datos(nombre);
-        String nom=nombre+"  ";
-        nom+=a[0];
-        nom+="    "+a[1]+"    ";
-        nom+=a[2];
-        Toast.makeText(this,nom,Toast.LENGTH_SHORT).show();
+        for(int i=0;i<lv.getCount();i++) {
+            String[] a = aces.datos(nombre[i]);
+            String nom = nombre + "  ";
+            nom += a[0];
+            nom += "    " + a[1] + "    ";
+            nom += a[2];
+            azucar+=Float.valueOf(a[0]);
+            grasa+=Float.valueOf(a[1]);
+            sodio+=Float.valueOf(a[2]);
+            Toast.makeText(this, nom, Toast.LENGTH_SHORT).show();
+        }
 
-        Intent i=new Intent(this,Main2Activity.class);
-        if(a[0]!=null) {
-            i.putExtra("nom", nombre);
-            i.putExtra("azu", a[0]);
-            i.putExtra("gra", a[1]);
-            i.putExtra("sod", a[2]);
+       // if(azucar!=null) {
+            Intent i=new Intent(this,Main2Activity.class);
 
+            i.putExtra("azu", azucar);
+            i.putExtra("gra", grasa);
+            i.putExtra("sod", sodio);
+        System.out.println(nombre+"   eses    "+azucar);
             startActivity(i);
-        }else{Toast.makeText(this,"error",Toast.LENGTH_SHORT).show();;}*/
+      //  }else{Toast.makeText(this,"error",Toast.LENGTH_SHORT).show();}
     }
 
 
@@ -108,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
         }
+        av.setText("");
     }
 
 }
