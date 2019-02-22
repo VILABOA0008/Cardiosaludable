@@ -56,19 +56,13 @@ public int getCantidad(int posi){
             public void onFocusChange(View v, boolean hasFocus) {
                 EditText et=(EditText)v;
                 System.out.println(et.getText().toString());
+                try{
                 cantidad.set(position,Integer.valueOf(et.getText().toString()));
+            }catch (Exception e){}
             }
         });
         ImageView borrar=(ImageView)fila.findViewById(R.id.borrar);
-        borrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println(position);
-                cantidad.remove(position);
-                medida.remove(position);
-                nombre.remove(position);
-            }
-        });
+borrar.setId(position);
 
 
         return fila;

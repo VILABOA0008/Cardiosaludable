@@ -120,7 +120,18 @@ public class MainActivity extends AppCompatActivity {
         av.setText("");
     }
     public void on_borrar(View v){
-        System.out.println("borarrarar");
+        int p=v.getId();
+        medidas.remove(p);
+        nombres.remove(p);
+        cantidades.remove(p);
+        for(int i=0;i<cantidades.size();i++) {
+            cantidades.set(i, adaptador.getCantidad(i));
+        }
+        adaptador= new Adaptador(this, nombres,cantidades,medidas);
+        lv.setAdapter(adaptador);
+
+
+
 
     }
 
